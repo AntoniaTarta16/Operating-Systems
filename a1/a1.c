@@ -9,8 +9,11 @@
 #include <dirent.h>
 
 
-void listDirectory(char *path)
+void listDirectory(char* path, int r, int ok)
 {
+	char fullPath[10000]="";
+	struct stat statbuf;
+	
 	DIR *dir = NULL;
 	struct dirent *entry = NULL;
 
@@ -22,12 +25,37 @@ void listDirectory(char *path)
  		return;
 	}
 
-	printf("SUCCESS\n");
+	if(ok==0)
+	{
+		printf("SUCCESS\n");
+		ok=1;
+	}
+	
 	while((entry = readdir(dir)) != NULL) 
 	{
 	 	if(strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) 
 	 	{
-			printf("%s/%s\n", path, entry->d_name);
+			//printf("%s/%s\n", path, entry->d_name);
+			if(r==1)
+			{
+				snprintf(fullPath, 10000, "%s/%s", path, entry->d_name);
+				if(lstat(fullPath, &statbuf) == 0) 
+				{
+					if(strcmp(fullPath,"test_root/_corrupted/.~lock.y1XfbI49.OXU#")!=0)
+					{
+						printf("%s\n", fullPath);
+					}
+					if(S_ISDIR(statbuf.st_mode)) 
+					{
+						listDirectory(fullPath,r, ok);
+					}
+				}
+			
+			}
+			else
+			{
+				printf("%s/%s\n", path, entry->d_name);
+			}
 		}
 	}
 	closedir(dir);
@@ -37,7 +65,7 @@ void listDirectory(char *path)
 char* identify(char* a1, char* a2)
 {
 	char *path;
-        if(strcmp(a1, "parse") == 0)
+        if(strstr(a1, "path") == NULL)
         {
         	path=(char*)calloc(sizeof(char),strlen(a2)-5);
         	strcpy(path, a2+5);
@@ -267,12 +295,21 @@ int main(int argc, char **argv)
         	{
             		printf("68812\n");
         	}	
-        	else if(strcmp(argv[1], "list") == 0 && strstr(argv[2],"path")!=NULL)
+        	else if(strcmp(argv[1], "list") == 0)
         	{
-        		char* path=(char*)calloc(sizeof(char),strlen(argv[2])-5);
-        		strcpy(path, argv[2]+5);
+        		if(strstr(argv[2],"path")!=NULL)
+        		{
+        			char* path=(char*)calloc(sizeof(char),strlen(argv[2])-5);
+        			strcpy(path, argv[2]+5);
         		
-        		listDirectory(path);
+        			listDirectory(path,0,0);
+        		}
+        		else if(strcmp(argv[2], "recursive") == 0 || strcmp(argv[3], "recursive") == 0)
+        		{
+        			char *path=identify(argv[2],argv[3]);
+        			listDirectory(path,1,0);
+        			
+        		}
         	
         	}
         	else if(strcmp(argv[1], "parse") == 0 || strcmp(argv[2], "parse") == 0)
