@@ -115,8 +115,6 @@ void extract(char* path, char* section, char* line)
 	int sectionNo=atoi(section);
 	int lineNo=atoi(line);
 	
-	lineNo+=sectionNo; // doar warnings
-	
 	int fd = open(path, O_RDONLY);	
 	if(fd == -1) 
 	{
@@ -166,10 +164,10 @@ void extract(char* path, char* section, char* line)
 
     	for (int i = 0; i < no_of_sections; i++) 
     	{
-        	read (fd, sect_name, 9);
-        	read (fd, &sect_type, 1);
-       		read (fd, &sect_offset, 4);
-      		read (fd, &sect_size, 4);
+        	read(fd, sect_name, 9);
+        	read(fd, &sect_type, 1);
+       		read(fd, &sect_offset, 4);
+      		read(fd, &sect_size, 4);
 
 		if (sect_type != 20 && sect_type != 32 && sect_type != 79 && 
 		    sect_type != 15 && sect_type != 24 && sect_type != 67) 	
@@ -180,11 +178,47 @@ void extract(char* path, char* section, char* line)
             		return;
         	}
         	
-        	if(sectionNo==i-1)
+        	if(sectionNo-1==i)
         	{
         	
         		lseek(fd, sect_offset, SEEK_SET);
         		//cazul cu succes
+        		int ok=0;
+        		off_t cntLine=1;
+        		char c=' ';
+        		for(int j=0;j<sect_size;j++)
+        		{
+        			read(fd, &c,1);
+        			if(lineNo==cntLine)
+        			{
+        				if(ok==0)
+        				{
+        					printf("SUCCESS\n");
+        					ok=1;
+        				}
+        				if(c!='\n')
+        				{
+        					printf("%c", c);
+        				}
+        				else
+        				{
+        					//printf("%c", c);
+        					wrongCase(path, fd); //nu e gresit, apelez pt free
+        					return;
+        				}
+        			}
+        			if(c=='\n')
+        			{
+        				cntLine++;
+        			}
+        			
+        		}
+        		if(ok==1)
+        		{
+        			wrongCase(path, fd); //tot pt free
+        			return;
+        		}
+        		
         		printf("ERROR\n");
             		printf("invalid line");
             		wrongCase(path, fd);
