@@ -6,6 +6,33 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <dirent.h>
+
+
+void listDirectory(char *path)
+{
+	DIR *dir = NULL;
+	struct dirent *entry = NULL;
+
+	dir = opendir(path);
+	if(dir == NULL) 
+	{
+		printf("ERROR\n");
+        	printf("invalid directory path");
+ 		return;
+	}
+
+	printf("SUCCESS\n");
+	while((entry = readdir(dir)) != NULL) 
+	{
+	 	if(strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) 
+	 	{
+			printf("%s/%s\n", path, entry->d_name);
+		}
+	}
+	closedir(dir);
+	free(path);
+}
 
 char* identify(char* a1, char* a2)
 {
@@ -239,7 +266,15 @@ int main(int argc, char **argv)
        		if(strcmp(argv[1], "variant") == 0)
         	{
             		printf("68812\n");
-        	}		
+        	}	
+        	else if(strcmp(argv[1], "list") == 0 && strstr(argv[2],"path")!=NULL)
+        	{
+        		char* path=(char*)calloc(sizeof(char),strlen(argv[2])-5);
+        		strcpy(path, argv[2]+5);
+        		
+        		listDirectory(path);
+        	
+        	}
         	else if(strcmp(argv[1], "parse") == 0 || strcmp(argv[2], "parse") == 0)
         	{
             		char *path=identify(argv[1],argv[2]);
