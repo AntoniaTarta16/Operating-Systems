@@ -62,6 +62,36 @@ void listDirectory(char* path, int r, int ok)
 	free(path);
 }
 
+void startWith(char* path, char *name)
+{
+	DIR *dir = NULL;
+	struct dirent *entry = NULL;
+
+	dir = opendir(path);
+	if(dir == NULL) 
+	{
+		printf("ERROR\n");
+        	printf("invalid directory path");
+ 		return;
+	}
+
+	printf("SUCCESS\n");
+	while((entry = readdir(dir)) != NULL) 
+	{
+	 	if(strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) 
+	 	{
+			if(strncmp(entry->d_name, name, strlen(name))==0)
+			{
+				printf("%s/%s\n", path, entry->d_name);
+			}
+		}
+	}
+	closedir(dir);
+	free(path);
+	free(name);
+	
+}
+
 char* identify(char* a1, char* a2)
 {
 	char *path;
@@ -309,6 +339,16 @@ int main(int argc, char **argv)
         			char *path=identify(argv[2],argv[3]);
         			listDirectory(path,1,0);
         			
+        		}
+        		else if(strstr(argv[2],"name_starts_with=")!=NULL)
+        		{
+        			char* name=(char*)calloc(sizeof(char),strlen(argv[2])-17);
+        			strcpy(name, argv[2]+17);
+        			
+        			char* path=(char*)calloc(sizeof(char),strlen(argv[3])-5);
+        			strcpy(path, argv[3]+5);
+        			
+        			startWith(path,name);
         		}
         	
         	}
