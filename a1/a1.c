@@ -92,6 +92,60 @@ void startWith(char* path, char *name)
 	
 }
 
+void permissions(char* path, char *permission)
+{
+	DIR *dir = NULL;
+	struct dirent *entry = NULL;
+	
+	char filePath[1000];
+        struct stat statbuf;
+
+
+	dir = opendir(path);
+	if(dir == NULL) 
+	{
+		printf("ERROR\n");
+        	printf("invalid directory path");
+ 		return;
+	}
+
+	printf("SUCCESS\n");
+	while((entry = readdir(dir)) != NULL) 
+	{
+	 	if(strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) 
+	 	{
+	 		snprintf(filePath, 1000, "%s/%s", path, entry->d_name);
+			if(lstat(filePath, &statbuf) == 0) 
+			{
+	 			short int p=0;
+	 			int size=strlen(permission);
+				for(int i=0;i<9;i++)
+				{
+					if(permission[i]!='-')
+					{
+						p|=1<<(size-i-1); //setam 1 pe biti cu permisiuni
+					}
+				
+				}
+				
+				short int aux=statbuf.st_mode;
+				aux&=511; //511 -1 pe cei mai putin nesemnificativi 7 biti
+				aux<<=7;
+				p<<=7;
+				if(aux==p)
+				{
+					printf("%s\n", filePath);
+				}
+			}
+			
+		}
+	}
+	closedir(dir);
+	free(path);
+	free(permission);
+	
+}
+
 char* identify(char* a1, char* a2)
 {
 	char *path;
@@ -349,6 +403,16 @@ int main(int argc, char **argv)
         			strcpy(path, argv[3]+5);
         			
         			startWith(path,name);
+        		}
+        		else
+        		{
+        			char* permission=(char*)calloc(sizeof(char),strlen(argv[2])-12);
+        			strcpy(permission, argv[2]+12);
+        			
+        			char* path=(char*)calloc(sizeof(char),strlen(argv[3])-5);
+        			strcpy(path, argv[3]+5);
+        			
+        			permissions(path,permission);
         		}
         	
         	}
