@@ -557,7 +557,6 @@ void findall(char* path, int ok)
 		}
 	}
 	closedir(dir);
-	free(path);
 }
 
 int main(int argc, char **argv)
@@ -644,6 +643,7 @@ int main(int argc, char **argv)
         			strcpy(path, argv[2]+5);
         	
         			findall(path, 0);
+        			free(path);
         		}
         	}
         }
