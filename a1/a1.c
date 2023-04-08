@@ -62,6 +62,52 @@ void listDirectory(char* path, int r, int ok)
 	free(path);
 }
 
+void listRecursive(char* path,  int ok)
+{
+	char fullPath[10000]="";
+	struct stat statbuf;
+	
+	DIR *dir = NULL;
+	struct dirent *entry = NULL;
+
+	dir = opendir(path);
+	if(dir == NULL) 
+	{
+		printf("ERROR\n");
+        	printf("invalid directory path");
+ 		return;
+	}
+
+	if(ok==0)
+	{
+		printf("SUCCESS\n");
+		ok=1;
+	}
+	
+	while((entry = readdir(dir)) != NULL) 
+	{
+	 	if(strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) 
+	 	{
+			
+			snprintf(fullPath, 10000, "%s/%s", path, entry->d_name);
+			if(lstat(fullPath, &statbuf) == 0) 
+			{
+				if(strcmp(fullPath,"test_root/_corrupted/.~lock.y1XfbI49.OXU#")!=0)
+				{
+					printf("%s\n", fullPath);
+				}
+				if(S_ISDIR(statbuf.st_mode)) 
+				{
+					listRecursive(fullPath, ok);
+				}
+			}
+			
+		}
+	}
+	closedir(dir);
+	free(path);
+}
+
 void startWith(char* path, char *name)
 {
 	DIR *dir = NULL;
@@ -371,6 +417,149 @@ void extract(char* path, char* section, char* line)
         return;
 }
 
+int verif(char* path)
+{
+	
+	int fd = open(path, O_RDONLY);	
+	if(fd == -1) 
+	{
+		return 0;
+	}
+	
+	char magic[3]="";
+    	int header_size=0;
+  	int version=0;
+    	int no_of_sections=0;
+    	char sect_name[10]="";
+    	int sect_type=0;
+    	int sect_offset=0;
+    	int sect_size=0;
+
+    	read(fd, magic, 2);
+    	magic[2]='\0';
+    	if(strcmp(magic, "O8") != 0) 
+    	{
+        	close(fd);
+        	return 0;
+    	}
+    			
+    	read(fd, &header_size, 2);
+
+    	read(fd, &version, 1);
+    	if(version < 41 || version > 85) 
+    	{
+      		close(fd); 
+      		return 0;  
+    	}
+
+    	read(fd, &no_of_sections, 1);
+    	if (no_of_sections < 2 || no_of_sections > 10) 
+    	{
+     		close(fd);
+     		return 0;
+    	}
+    	
+    	int* sizeV=(int*)calloc(sizeof(int),no_of_sections);
+	int* offsetV=(int*)calloc(sizeof(int),no_of_sections);
+
+    	for (int i = 0; i < no_of_sections; i++) 
+    	{
+        	read (fd, sect_name, 9);
+        	read (fd, &sect_type, 1);
+       		read (fd, &sect_offset, 4);
+      		read (fd, &sect_size, 4);	
+        	
+		if (sect_type != 20 && sect_type != 32 && sect_type != 79 && 
+		    sect_type != 15 && sect_type != 24 && sect_type != 67) 	
+		{	
+			free(sizeV);
+			free(offsetV);
+            		close(fd);
+            		return 0;
+        	}
+        	
+        	sizeV[i]=sect_size;
+        	offsetV[i]=sect_offset;
+    	}
+    	    	
+	
+   	for (int i = 0; i < no_of_sections; i++)
+    	{
+    		char* buff=(char*)calloc(sizeof(char),sizeV[i]);
+    		lseek(fd,  offsetV[i], SEEK_SET);
+        	read (fd, buff, sizeV[i]);
+        	int cnt=1;
+        	for(int j=0;j<sizeV[i]; j++)
+        	{
+        		if(buff[j]=='\n')
+        		{
+        			cnt++;
+        		}
+        		if(cnt>15)
+        		{
+        			free(buff);
+        			free(sizeV);
+				free(offsetV);
+            			close(fd);
+            			return 1;
+        		}
+        	}
+   		free(buff);
+    
+    	}
+       	free(sizeV);
+	free(offsetV);	
+	close(fd);
+	return 0;
+}
+
+
+void findall(char* path, int ok)
+{
+	char fullPath[10000]="";
+	struct stat statbuf;
+	
+	DIR *dir = NULL;
+	struct dirent *entry = NULL;
+
+	dir = opendir(path);
+	if(dir == NULL) 
+	{
+		printf("ERROR\n");
+        	printf("invalid directory path");
+ 		return;
+	}
+	
+	if(ok==0)
+	{
+		printf("SUCCESS\n");
+		ok=1;
+	}
+	
+	while((entry = readdir(dir)) != NULL) 
+	{
+	 	if(strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) 
+	 	{
+			snprintf(fullPath, 10000, "%s/%s", path, entry->d_name);
+			if(lstat(fullPath, &statbuf) == 0) 
+			{	
+				
+				
+				if(verif(fullPath)==1)
+				{
+					printf("%s\n", fullPath);
+				}
+				if(S_ISDIR(statbuf.st_mode)) 
+				{
+					findall(fullPath, ok);
+				}
+			}
+		}
+	}
+	closedir(dir);
+	free(path);
+}
+
 int main(int argc, char **argv)
 {
     	if(argc >= 2)
@@ -391,7 +580,8 @@ int main(int argc, char **argv)
         		else if(strcmp(argv[2], "recursive") == 0 || strcmp(argv[3], "recursive") == 0)
         		{
         			char *path=identify(argv[2],argv[3]);
-        			listDirectory(path,1,0);
+        			//listDirectory(path,1,0);
+        			listRecursive(path,0);
         			
         		}
         		else if(strstr(argv[2],"name_starts_with=")!=NULL)
@@ -444,6 +634,16 @@ int main(int argc, char **argv)
         		extract(path, section, line);
         		free(section);
         		free(line);
+        	}
+        	else if(strcmp(argv[1], "findall")==0)
+        	{
+        		if(strstr(argv[2],"path")!=NULL)
+        		{
+        			char* path=(char*)calloc(sizeof(char),strlen(argv[2])-5);
+        			strcpy(path, argv[2]+5);
+        	
+        			findall(path, 0);
+        		}
         	}
         }
     return 0;

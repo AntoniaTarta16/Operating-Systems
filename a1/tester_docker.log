@@ -1,0 +1,85 @@
+Running tester for the first time.
+Generating tests cases (this may take a while)...
+Testing variant...[1;32mOK[0m
+Testing simple_listing_1...[1;32mOK[0m
+Testing simple_listing_2...[1;32mOK[0m
+Testing simple_listing_3...[1;32mOK[0m
+Testing simple_listing_4...[1;32mOK[0m
+Testing simple_listing_5...[1;32mOK[0m
+Testing recursive_listing_1...[1;32mOK[0m
+Testing recursive_listing_2...[1;32mOK[0m
+Testing recursive_listing_3...[1;32mOK[0m
+Testing recursive_listing_4...[1;32mOK[0m
+Testing recursive_listing_5...[1;32mOK[0m
+Testing name_starts_with_1...[1;32mOK[0m
+Testing permissions_1...[1;32mOK[0m
+Testing name_starts_with_2...[1;32mOK[0m
+Testing permissions_2...[1;32mOK[0m
+Testing name_starts_with_3...[1;32mOK[0m
+Testing permissions_3...[1;32mOK[0m
+Testing name_starts_with_4...[1;32mOK[0m
+Testing permissions_4...[1;32mOK[0m
+Testing permissions_5...[1;32mOK[0m
+Testing name_starts_with_5...[1;32mOK[0m
+Testing permissions_6...[1;32mOK[0m
+Testing name_starts_with_6...[1;32mOK[0m
+Testing parse_1...[1;32mOK[0m
+Testing parse_2...[1;32mOK[0m
+Testing parse_3...[1;32mOK[0m
+Testing parse_4...[1;32mOK[0m
+Testing parse_5...[1;32mOK[0m
+Testing parse_6...[1;32mOK[0m
+Testing parse_7...[1;32mOK[0m
+Testing parse_8...[1;32mOK[0m
+Testing parse_9...[1;32mOK[0m
+Testing parse_10...[1;32mOK[0m
+Testing corrupted_1...[1;32mOK[0m
+Testing corrupted_2...[1;32mOK[0m
+Testing corrupted_3...[1;32mOK[0m
+Testing corrupted_4...[1;32mOK[0m
+Testing corrupted_5...[1;32mOK[0m
+Testing corrupted_6...[1;32mOK[0m
+Testing corrupted_7...[1;32mOK[0m
+Testing corrupted_8...[1;32mOK[0m
+Testing corrupted_9...[1;32mOK[0m
+Testing corrupted_10...[1;32mOK[0m
+Testing corrupted_11...[1;32mOK[0m
+Testing corrupted_12...[1;32mOK[0m
+Testing extract_1...[1;32mOK[0m
+Testing extract_2...[1;32mOK[0m
+Testing extract_3...[1;32mOK[0m
+Testing extract_4...[1;32mOK[0m
+Testing extract_5...[1;32mOK[0m
+Testing extract_6...[1;32mOK[0m
+Testing extract_7...[1;32mOK[0m
+Testing extract_8...[1;32mOK[0m
+Testing extract_9...[1;32mOK[0m
+Testing extract_10...[1;32mOK[0m
+Testing extract_11...[1;32mOK[0m
+Testing extract_12...[1;32mOK[0m
+Testing findall_1...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/5gGPQbFcg/Bx5zJiyc.Z18', 'test_root/5gGPQbFcg/pXsu/2qje.TsQ', 'test_root/5gGPQbFcg/pXsu/oyVpb.syu', 'test_root/5gGPQbFcg/pXsu/ysaw.CAj', 'test_root/5gGPQbFcg/pXsu/HTTJ/btdmXWlsT5.dTC', 'test_root/5gGPQbFcg/pXsu/HTTJ/744JmVGoDK/756rmfr0z.2pw', 'test_root/5gGPQbFcg/pXsu/HTTJ/744JmVGoDK/5qw5g/SHOAuxGKgW.uzx', 'test_root/5gGPQbFcg/pXsu/HTTJ/744JmVGoDK/5qw5g/nZSRR.yCN', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/nlHJe.ujJ', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/KGFuC3GWGB.dvy', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/0dWEeTSIte.P2Z', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/XZDKzlYi/q1mWjjX.fXw', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/zBVddzaZ3/SpjqYd1y.fFS', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/zBVddzaZ3/ZASqI3.oP4', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/zBVddzaZ3/epXtCe6NP.lGS', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/zBVddzaZ3/9CCEWF9Gio.lxO', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/zBVddzaZ3/9JL4/0tYDG.0j5', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/zBVddzaZ3/9JL4/WmSJ4JnLM.5GJ', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/Fw6OLjLc/mroJQv.177', 'test_root/5gGPQbFcg/pXsu/HTTJ/BfhUY6f/Fw6OLjLc/9uYcAm.FH4', 'test_root/5gGPQbFcg/pXsu/HTTJ/sZ6sfQQ/HtKZoDp.BlD', 'test_root/5gGPQbFcg/pXsu/HTTJ/sZ6sfQQ/qoBsxlBb.uoc', 'test_root/5gGPQbFcg/pXsu/HTTJ/sZ6sfQQ/aXes.uD2', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/sKw0Zr9j.Zb3', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/tztY2Ef6w.oNF', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/U55Q93d.X4O', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/jZjS.RqT', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/4tK1.Jep', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/wc2fj7X.Tv9', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/Fp4aCx/chzIHn.MXW', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/Fp4aCx/dDTmR.0Qh', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/Fp4aCx/v9yESMpOxW/xMDCU.h2Q', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/Fp4aCx/v9yESMpOxW/gRvtaZ.Vr1', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/Fp4aCx/v9yESMpOxW/1QuQXG9K/KzVDnL9.MdW', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/wHnscp0pBX/9amdl5.rjd', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/wHnscp0pBX/oLdiplOp.9pl', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/wHnscp0pBX/uqaF/HMwJ.J5Q', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/RqOR/wHnscp0pBX/uqaF/0WLtf.S3a', 'test_root/5gGPQbFcg/pXsu/XynFHOqU/m2NxoqRZp/DzzG0yni.DjJ', 'test_root/5gGPQbFcg/pXsu/gShLIV/OqgCt.aKC', 'test_root/5gGPQbFcg/pXsu/gShLIV/ZL8EKY.Btd', 'test_root/5gGPQbFcg/gTCTdjt/cmZhqNRz9.4HB', 'test_root/5gGPQbFcg/gTCTdjt/EaQU.B9x', 'test_root/5gGPQbFcg/taAy7zrOd/5dIlKu.zpY', 'test_root/i8EPiTfnBI/KKNC71i/NvA0FZOa.McF', 'test_root/i8EPiTfnBI/KKNC71i/yqMq4eYuGX.IfB', 'test_root/i8EPiTfnBI/KKNC71i/hHxM59eoR.qAI', 'test_root/i8EPiTfnBI/KKNC71i/8Criv.QPn', 'test_root/i8EPiTfnBI/KKNC71i/V6STD2iI8b.wsy', 'test_root/i8EPiTfnBI/KKNC71i/ZMB4JK9bOB/HjXsO7b.w2s', 'test_root/i8EPiTfnBI/KKNC71i/ZMB4JK9bOB/DXdm/EvBieu.ENV', 'test_root/i8EPiTfnBI/KKNC71i/ZMB4JK9bOB/DXdm/titCc/iP7RlIB.J7L', 'test_root/i8EPiTfnBI/KKNC71i/evAlFPY1Q/GdoI.AlU', 'test_root/i8EPiTfnBI/KKNC71i/evAlFPY1Q/M8YlOZ.xUP', 'test_root/i8EPiTfnBI/a8dw4fp/P2fn7KYHES/rzRAaKJz.zcR', 'test_root/i8EPiTfnBI/a8dw4fp/P2fn7KYHES/Ndhb67N.Q6K', 'test_root/i8EPiTfnBI/a8dw4fp/UF8Cza/LMRqcGK14.f8I', 'test_root/i8EPiTfnBI/a8dw4fp/UF8Cza/psUtgw.UlL', 'test_root/i8EPiTfnBI/a8dw4fp/UF8Cza/pwUP7Ics.tY3', 'test_root/i8EPiTfnBI/a8dw4fp/UF8Cza/rBJw/0F3PZe.mLz', 'test_root/i8EPiTfnBI/a8dw4fp/UF8Cza/rBJw/2h3YvTUmGa.W08', 'test_root/i8EPiTfnBI/a8dw4fp/UF8Cza/KNX9Zt/G0c4EigmS.oAp', 'test_root/i8EPiTfnBI/a8dw4fp/hA9Xz/Lqf4Nq/RXs5CPOt.7g5', 'test_root/i8EPiTfnBI/a8dw4fp/f6Unfbll/EmyXBfMS.1LE', 'test_root/i8EPiTfnBI/a8dw4fp/f6Unfbll/VwX2MwfwM.tZF', 'test_root/i8EPiTfnBI/a8dw4fp/f6Unfbll/8w32pf.YQQ', 'test_root/i8EPiTfnBI/a8dw4fp/f6Unfbll/mwh81nG.H0o', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/cbvDJMUNNE.Edo', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/6WZrA/Pp2fP0Z.B5b', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/6WZrA/N9MqGl.maw', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/6WZrA/zlEL/GUTU13xhZp.JF4', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/6WZrA/zlEL/a0PlY5/viOVIKJ59/iz9UJ.ggn', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/6WZrA/zlEL/a0PlY5/viOVIKJ59/cYMnf.Upu', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/mr1aIeC.OTu', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/6SsKmd7F.MQO', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/xjy3T.TMu', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/Co1opb/IEqMXcZJr.VAc', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/Co1opb/a8K3to9N.0sO', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/Co1opb/ZeAgvC2.Mh4', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/Co1opb/OXm5Ex.UhF', 'test_root/i8EPiTfnBI/a8dw4fp/yHgha6zYG/7dx8VS11q/Co1opb/LeVIZu.jaa', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/OJAIKn1j.4Ft', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/l0z0EtJTa.Vge', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/WNO85NcQ45.mpp', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/6BTfyIoF0M.4VP', 'test_root/i8EPiTfnBI/B4W3zrrzuy/Jv3LdeX.mlL', 'test_root/i8EPiTfnBI/B4W3zrrzuy/ZI6JXK.aHs', 'test_root/i8EPiTfnBI/B4W3zrrzuy/EVJ4AM/mYQ6b.XR4', 'test_root/i8EPiTfnBI/B4W3zrrzuy/EVJ4AM/GgOQR.eeZ', 'test_root/i8EPiTfnBI/B4W3zrrzuy/EVJ4AM/iI9eHLfzC.SKz', 'test_root/i8EPiTfnBI/B4W3zrrzuy/Vj2zd1b/KXYuc.mAV', 'test_root/i8EPiTfnBI/B4W3zrrzuy/Vj2zd1b/zTtrhnJaG5.h5u', 'test_root/i8EPiTfnBI/OsuB8ev0lX/xAsnX.F38', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/T9ujOcCrA.uRj', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/VhLs8GlvDC.zyg', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/bLntq815Uh.Jg2', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/TMPF.0Ab', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/Bu2w/uSLq.qDE', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/Bu2w/5qvs5/jA8dgfR.lDu', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/Bu2w/5qvs5/l6HvRaxAm.l5J', 'test_root/i8EPiTfnBI/OsuB8ev0lX/FnpYQI5/SzpcR/30a14f.N5K', 'test_root/7eoL5s/OwEPmAyND.3U8', 'test_root/7eoL5s/ORGbYGWw9.BC6', 'test_root/7eoL5s/XlTt.jO2', 'test_root/7eoL5s/P0QCZa/xFP3oA7ZoN.2y5', 'test_root/7eoL5s/nCgihVZc6/D1FB.S4e', 'test_root/7eoL5s/nCgihVZc6/u335UC3fx.A3B', 'test_root/7eoL5s/nCgihVZc6/wbj5l87.agf', 'test_root/7eoL5s/nCgihVZc6/GTEw.MAr', 'test_root/7eoL5s/T7W6CBKKAN/LZrv2NCi.c26', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/9vw5b0L.gTs', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/OqACZ8.KM8', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/mKe09XaCzj.qpo', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/RFDQVyQQ.QG0', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/O0wqQvbc0.FiZ', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/351RQFm4.i38', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tKQdbxQh.g7K', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/lTzhpZgqq.ctI', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/gqYhJNorHP.G7u', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/Em7WGKii.hHp', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/vlI5nwDRHD/fRzOLb2JIf.1Mx', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/vlI5nwDRHD/NGEmTTyC.luo', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9DVyfa/1mEAyv5.EKT', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/7jSnpL.rbK', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/tnK7qfs/06Yd6j.Fi9', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/tnK7qfs/sBsiP.V7S', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/tnK7qfs/UVdoQ.esD', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/tnK7qfs/a9fW72jHUC.x4G', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/tnK7qfs/KjtKBUMy.ZL0', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/tnK7qfs/AKyDO.Q2i', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/9D8xn9/tnK7qfs/uqoNyu.BLj', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/unsX7.YZp', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/MIyZv.RHz', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yQ8mEwU.QOt', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/7TUIuLlZU/VhSzuYt1.Eal', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/7TUIuLlZU/T2WV.5F8', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/7TUIuLlZU/0J8JguMs2T.HM0', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/V0K37.HGj', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/P8a9PitefY.dGl', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/cQW4toPFh/plsL.YuW', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/cQW4toPFh/UKGynA/6sIY69WC6x.Ayn', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/cQW4toPFh/UKGynA/rp74e.ffh', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/cQW4toPFh/UKGynA/brELKeZBLV.URF', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/rmcdqs7v/wUy5xBzn7.a6O', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/eA9sOs/FArU.SH1', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/yrt3/eA9sOs/6tZSa.HNU', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/m16ptCX/KLgApImF.QZT', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/m16ptCX/FlW9ylt2.Tna', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/m16ptCX/q0AfvY/tmnpmJwFmT.JSn', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/m16ptCX/q0AfvY/cnqDIrE.wSL', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/m16ptCX/q0AfvY/s2VRnTaI/JxQ23guxW.uU1', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/m16ptCX/q0AfvY/s2VRnTaI/Zm9ghs.ioO', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/m16ptCX/q0AfvY/s2VRnTaI/yhfKYMKS.euC', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/sKlVXCHajf/VwvIcw.MJB', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/9SYjUNm/Ln52tef.291', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/9SYjUNm/J4Ou.HtY', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/9SYjUNm/g1yGI7W.GJF', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/9SYjUNm/jBHN.ppc', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/9SYjUNm/AobE.nPG', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/9SYjUNm/fyUjYWGGE.JqY', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/ICQr.esE', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/itoFCogz.6WU', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/N57pAi.vum', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/ZX8Zz.c2f', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/XfL5mOxn6J.n4e', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/8a6zz/9tAmuSLuvY.5m7', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/vtIj/S6JxQu6t.L1G', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/vtIj/KHSVvCbIr3.9IR', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/vtIj/GBIE5jia.0D0', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/yoCAmuJMen/X0CsBJZd.y8t', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/yoCAmuJMen/mtQOch.80s', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/yoCAmuJMen/6o7GAtdDEi.DoB', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/YNQmP8/VvIC/ju1baO.Fv5', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/YNQmP8/VvIC/HnTAOEW.M5e', 'test_root/7eoL5s/T7W6CBKKAN/nPJM5M/43AIR.b7f', 'test_root/7eoL5s/T7W6CBKKAN/nPJM5M/K9vQPbp3.KDQ', 'test_root/7eoL5s/T7W6CBKKAN/nPJM5M/1KFfbRuq.BJ0', 'test_root/7eoL5s/Y0I3pm/Us5h.hy9', 'test_root/7eoL5s/Y0I3pm/9KKde9aK/NoGY/j32l.Xpx', 'test_root/7eoL5s/Y0I3pm/9KKde9aK/NoGY/A8C8AuHO.b3v', 'test_root/7eoL5s/Y0I3pm/9KKde9aK/NoGY/ZFzFBN6Je/CjGVdfU.YwK', 'test_root/7eoL5s/Y0I3pm/9KKde9aK/NoGY/ZFzFBN6Je/fiFOTervn.PII', 'test_root/7eoL5s/Y0I3pm/hqd3t/wmSaVEijQ.gOe', 'test_root/4hrhuR/oxTqXjnQuH/DbjpRPwayh.j3K', 'test_root/4hrhuR/oxTqXjnQuH/AR3icSyO.bfJ']
+	Your output: ['']
+Testing findall_2...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/7TUIuLlZU/VhSzuYt1.Eal', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/7TUIuLlZU/T2WV.5F8', 'test_root/7eoL5s/T7W6CBKKAN/ULuN53A/P1nBWHOJ/tuOUHjZ/7TUIuLlZU/0J8JguMs2T.HM0']
+	Your output: ['']
+Testing findall_3...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/ICQr.esE', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/itoFCogz.6WU', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/N57pAi.vum', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/ZX8Zz.c2f', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/XfL5mOxn6J.n4e', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/8a6zz/9tAmuSLuvY.5m7', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/vtIj/S6JxQu6t.L1G', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/vtIj/KHSVvCbIr3.9IR', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/vtIj/GBIE5jia.0D0', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/yoCAmuJMen/X0CsBJZd.y8t', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/yoCAmuJMen/mtQOch.80s', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/1f4WDI7/yoCAmuJMen/6o7GAtdDEi.DoB', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/YNQmP8/VvIC/ju1baO.Fv5', 'test_root/7eoL5s/T7W6CBKKAN/QuQGoOAeHM/YNQmP8/VvIC/HnTAOEW.M5e']
+	Your output: ['']
+Testing findall_4...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/i8EPiTfnBI/B4W3zrrzuy/Jv3LdeX.mlL', 'test_root/i8EPiTfnBI/B4W3zrrzuy/ZI6JXK.aHs', 'test_root/i8EPiTfnBI/B4W3zrrzuy/EVJ4AM/mYQ6b.XR4', 'test_root/i8EPiTfnBI/B4W3zrrzuy/EVJ4AM/GgOQR.eeZ', 'test_root/i8EPiTfnBI/B4W3zrrzuy/EVJ4AM/iI9eHLfzC.SKz', 'test_root/i8EPiTfnBI/B4W3zrrzuy/Vj2zd1b/KXYuc.mAV', 'test_root/i8EPiTfnBI/B4W3zrrzuy/Vj2zd1b/zTtrhnJaG5.h5u']
+	Your output: ['']
+Testing findall_5...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/4hrhuR/oxTqXjnQuH/DbjpRPwayh.j3K', 'test_root/4hrhuR/oxTqXjnQuH/AR3icSyO.bfJ']
+	Your output: ['']
+Testing findall_6...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/OJAIKn1j.4Ft', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/l0z0EtJTa.Vge', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/WNO85NcQ45.mpp', 'test_root/i8EPiTfnBI/FhrwfJ0/FY6OegcI/6BTfyIoF0M.4VP']
+	Your output: ['']
+Testing findall_7...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/i8EPiTfnBI/a8dw4fp/hA9Xz/Lqf4Nq/RXs5CPOt.7g5']
+	Your output: ['']
+Testing findall_8...[1;31mFAIL[0m
+	Expected output: ['SUCCESS', 'test_root/i8EPiTfnBI/KKNC71i/ZMB4JK9bOB/DXdm/titCc/iP7RlIB.J7L']
+	Your output: ['']
+Total score: 57 / 65
+Assignment grade: 87.69 / 100
