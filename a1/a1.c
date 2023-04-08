@@ -105,7 +105,7 @@ void listRecursive(char* path,  int ok)
 		}
 	}
 	closedir(dir);
-	free(path);
+	//free(path);
 }
 
 void startWith(char* path, char *name)
@@ -545,7 +545,7 @@ void findall(char* path, int ok)
 			{	
 				
 				
-				if(verif(fullPath)==1)
+				if(verif(fullPath)==1) 
 				{
 					printf("%s\n", fullPath);
 				}
@@ -582,6 +582,7 @@ int main(int argc, char **argv)
         			char *path=identify(argv[2],argv[3]);
         			//listDirectory(path,1,0);
         			listRecursive(path,0);
+        			free(path);
         			
         		}
         		else if(strstr(argv[2],"name_starts_with=")!=NULL)
