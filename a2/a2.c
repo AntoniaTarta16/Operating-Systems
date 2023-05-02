@@ -7,14 +7,28 @@
 #include <pthread.h>
 #include <semaphore.h>
 
+sem_t sem1; 
+sem_t sem3;
 
 void *thread_f23(void *param)
 {
     int id = *((int*)param);
-   
-    info(BEGIN, 8, id);
-  
-    info(END, 8, id);
+    if(id==1)
+    {	sem_wait(&sem3);
+    	info(BEGIN, 8, id);
+    	info(END, 8, id);
+    	sem_post(&sem1);
+    }
+    else
+    {
+    	info(BEGIN, 8, id);
+    	if(id==3)
+    	{
+    		sem_post(&sem3);
+    		sem_wait(&sem1);
+    	}
+    	info(END, 8, id);
+    }
    
     return NULL;
 }
@@ -192,16 +206,16 @@ int main()
     		int id[5];
 		
 		
-		/*if(sem_init(&sem1, 0, 0) == -1) 
+		if(sem_init(&sem1, 0, 0) == -1) 
         	{
             		perror("Could not init the semaphore");
         		return -1;
         	}
-    		if(sem_init(&sem2, 0, 0) == -1) 
+    		if(sem_init(&sem3, 0, 0) == -1) 
         	{
             		perror("Could not init the semaphore");
         		return -1;
-        	}*/
+        	}
         	//int i=3;
         	//pthread_create(&tid[2], NULL, thread_f23, &i);
 		for(int i=0; i<5; i++)
@@ -219,8 +233,8 @@ int main()
     		}
     		
     		
-    		//sem_destroy(&sem1);
-    		//sem_destroy(&sem2);
+    		sem_destroy(&sem1);
+    		sem_destroy(&sem3);
     		///////////////////////////////////////
     		
 		//P9
