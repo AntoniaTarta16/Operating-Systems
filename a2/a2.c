@@ -6,9 +6,12 @@
 #include "a2_helper.h"
 #include <pthread.h>
 #include <semaphore.h>
+#include <fcntl.h>
 
 sem_t sem1; 
 sem_t sem3;
+sem_t* sem5;
+sem_t* sem2;
 
 void *thread_f23(void *param)
 {
@@ -21,6 +24,11 @@ void *thread_f23(void *param)
     }
     else
     {
+    	if(id==5)
+    	{	
+    		//printf("astept dupa 2\n");
+    		sem_wait(sem2);
+    	}
     	info(BEGIN, 8, id);
     	if(id==3)
     	{
@@ -28,6 +36,11 @@ void *thread_f23(void *param)
     		sem_wait(&sem1);
     	}
     	info(END, 8, id);
+    	if(id==5)
+    	{
+    		sem_post(sem5);
+    		//printf("Am terminat, sunt 5\n");
+    	}
     }
    
     return NULL;
@@ -48,10 +61,19 @@ void *thread_f25(void *param)
 {
     int id = *((int*)param);
    
+    if(id==4)
+    {
+    	//printf("astept dupa 5\n");
+    	sem_wait(sem5);
+    }
     info(BEGIN, 2, id);
   
     info(END, 2, id);
-   
+    if(id==2)
+    {
+    	sem_post(sem2);
+    	//printf("Am terminat, sunt 2\n");
+    }
     return NULL;
 }
 
@@ -60,6 +82,20 @@ int main()
 	init();
 
     	info(BEGIN, 1, 0);
+        
+        sem2 = sem_open("s2", O_CREAT, 0644, 0);
+	if(sem2 == NULL) 
+	{
+		perror("Could not aquire the semaphore");
+		return -1;
+	}
+	sem5 = sem_open("s5", O_CREAT, 0644, 0);
+	if(sem5== NULL) 
+	{
+		perror("Could not aquire the semaphore");
+		return -1;
+	}
+		
     
     	//P2
     	pid_t pid2=-1;
@@ -76,7 +112,6 @@ int main()
 		///////////////sincronizare P dif////////////////
 			pthread_t tid3[5];
     			int id3[5];
-		
 		
 			for(int i=0; i<5; i++)
    			{
@@ -216,15 +251,11 @@ int main()
             		perror("Could not init the semaphore");
         		return -1;
         	}
-        	//int i=3;
-        	//pthread_create(&tid[2], NULL, thread_f23, &i);
+        	
 		for(int i=0; i<5; i++)
    		{
-   			//if(i!=2)
-   			{
         		id[i] = i+1;
         		pthread_create(&tid[i], NULL, thread_f23, &id[i]);
-        		}
     		}
     		
     		for(int i=0; i<5; i++)
@@ -277,6 +308,10 @@ int main()
 	waitpid(pid2, NULL, 0);
 	waitpid(pid3, NULL, 0);
 	waitpid(pid8, NULL, 0);
+	
+	
+    	sem_close(sem2);
+	sem_close(sem5);
     	info(END, 1, 0);
     	return 0;
 }
