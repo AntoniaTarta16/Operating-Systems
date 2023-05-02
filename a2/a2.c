@@ -4,6 +4,42 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "a2_helper.h"
+#include <pthread.h>
+#include <semaphore.h>
+
+
+void *thread_f23(void *param)
+{
+    int id = *((int*)param);
+   
+    info(BEGIN, 8, id);
+  
+    info(END, 8, id);
+   
+    return NULL;
+}
+
+void *thread_f24(void *param)
+{
+    int id = *((int*)param);
+   
+    info(BEGIN, 9, id);
+  
+    info(END, 9, id);
+   
+    return NULL;
+}
+
+void *thread_f25(void *param)
+{
+    int id = *((int*)param);
+   
+    info(BEGIN, 2, id);
+  
+    info(END, 2, id);
+   
+    return NULL;
+}
 
 int main()
 {
@@ -22,6 +58,24 @@ int main()
 	if(pid2==0)
 	{
 		info(BEGIN, 2, 0);
+		
+		///////////////sincronizare P dif////////////////
+			pthread_t tid3[5];
+    			int id3[5];
+		
+		
+			for(int i=0; i<5; i++)
+   			{
+   				id3[i] = i+1;
+        			pthread_create(&tid3[i], NULL, thread_f25, &id3[i]);
+        		}
+    		
+    			for(int i=0; i<5; i++)
+    			{
+        			pthread_join(tid3[i], NULL);
+    			}
+    		
+    		/////////////////////////////////////////////////
 		
 		//P4
     		pid_t pid4=-1;
@@ -132,6 +186,43 @@ int main()
 	{
 		info(BEGIN, 8, 0);
 		
+		
+		//////threads in acelasi proces////////
+		pthread_t tid[5];
+    		int id[5];
+		
+		
+		/*if(sem_init(&sem1, 0, 0) == -1) 
+        	{
+            		perror("Could not init the semaphore");
+        		return -1;
+        	}
+    		if(sem_init(&sem2, 0, 0) == -1) 
+        	{
+            		perror("Could not init the semaphore");
+        		return -1;
+        	}*/
+        	//int i=3;
+        	//pthread_create(&tid[2], NULL, thread_f23, &i);
+		for(int i=0; i<5; i++)
+   		{
+   			//if(i!=2)
+   			{
+        		id[i] = i+1;
+        		pthread_create(&tid[i], NULL, thread_f23, &id[i]);
+        		}
+    		}
+    		
+    		for(int i=0; i<5; i++)
+    		{
+        		pthread_join(tid[i], NULL);
+    		}
+    		
+    		
+    		//sem_destroy(&sem1);
+    		//sem_destroy(&sem2);
+    		///////////////////////////////////////
+    		
 		//P9
     		pid_t pid9=-1;
    		pid9=fork();
@@ -144,7 +235,23 @@ int main()
 		{
 			info(BEGIN, 9, 0);
 			
-			
+			///////////////bariera//////////////////
+			pthread_t tid2[37];
+    			int id2[37];
+		
+		
+			for(int i=0; i<37; i++)
+   			{
+   				id2[i] = i+1;
+        			pthread_create(&tid2[i], NULL, thread_f24, &id2[i]);
+        		}
+    		
+    			for(int i=0; i<37; i++)
+    			{
+        			pthread_join(tid2[i], NULL);
+    			}
+    		
+    			///////////////////////////////////////
 		
 			info(END, 9, 0);
 			exit(0);
