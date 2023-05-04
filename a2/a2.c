@@ -12,6 +12,7 @@ sem_t sem1;
 sem_t sem3;
 sem_t* sem5;
 sem_t* sem2;
+sem_t sem9;
 
 void *thread_f23(void *param)
 {
@@ -46,14 +47,20 @@ void *thread_f23(void *param)
     return NULL;
 }
 
+//int nrThreads = 0;
 void *thread_f24(void *param)
 {
     int id = *((int*)param);
    
+    sem_wait(&sem9);
     info(BEGIN, 9, id);
-  
-    info(END, 9, id);
+    //nrThreads++;
    
+    //printf("The number of threads in the limited area is: %d\n", nrThreads);
+    
+    info(END, 9, id);
+    //nrThreads--;
+    sem_post(&sem9);
     return NULL;
 }
 
@@ -283,7 +290,11 @@ int main()
 			///////////////bariera//////////////////
 			pthread_t tid2[37];
     			int id2[37];
-		
+    			if(sem_init(&sem9, 0, 5) != 0) 
+    			{
+        			perror("Could not init the semaphore");
+        			return -1;
+    			}
 		
 			for(int i=0; i<37; i++)
    			{
@@ -295,7 +306,8 @@ int main()
     			{
         			pthread_join(tid2[i], NULL);
     			}
-    		
+    			
+    			sem_destroy(&sem9);
     			///////////////////////////////////////
 		
 			info(END, 9, 0);
