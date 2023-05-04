@@ -291,7 +291,7 @@ int main()
 			pthread_t tid2[37];
     			int id2[37];
     			if(sem_init(&sem9, 0, 5) != 0) 
-    			{
+    			{ 
         			perror("Could not init the semaphore");
         			return -1;
     			}
