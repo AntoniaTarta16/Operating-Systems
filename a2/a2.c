@@ -13,6 +13,7 @@ sem_t sem3;
 sem_t* sem5;
 sem_t* sem2;
 sem_t sem9;
+sem_t* semEND15;
 
 void *thread_f23(void *param)
 {
@@ -47,8 +48,35 @@ void *thread_f23(void *param)
     return NULL;
 }
 
-//int nrThreads = 0;
+int nrThreads=0;
+int ok=0;
 void *thread_f24(void *param)
+{
+    int id = *((int*)param);
+
+    info(BEGIN, 9,id);
+    //printf("A inceput %d", id);
+    nrThreads++;
+    if(nrThreads==5)
+    {
+    	//printf("END 15");
+    	info(END, 9,15);
+    	for(int i=1;i<=4;i++)
+    	{
+    		info(END, 9,i);
+    		
+    	}
+    	ok=1;
+    }
+    if(ok==1)
+    {
+    	sem_post(semEND15);
+    }
+    
+    return NULL;
+}
+
+void *thread_f24_2(void *param)
 {
     int id = *((int*)param);
    
@@ -61,6 +89,7 @@ void *thread_f24(void *param)
     info(END, 9, id);
     //nrThreads--;
     sem_post(&sem9);
+   
     return NULL;
 }
 
@@ -295,11 +324,34 @@ int main()
         			perror("Could not init the semaphore");
         			return -1;
     			}
-		
+    			semEND15 = sem_open("s", O_CREAT, 0644, 0);
+			if(semEND15== NULL) 
+			{
+				perror("Could not aquire the semaphore");
+				return -1;
+			}
+			int i=14;
+			id2[i] = i+1;
+			pthread_create(&tid2[14], NULL, thread_f24, &id2[i]);
+			i=0;
+			id2[i] = i+1;
+			pthread_create(&tid2[0], NULL, thread_f24, &id2[i]);
+			i=1;
+			id2[i] = i+1;
+			pthread_create(&tid2[1], NULL, thread_f24, &id2[i]);
+			i=2;
+			id2[i] = i+1;
+			pthread_create(&tid2[2], NULL, thread_f24, &id2[i]);
+			i=3;
+			id2[i] = i+1;
+			pthread_create(&tid2[3], NULL, thread_f24, &id2[i]);
+			
+			sem_wait(semEND15);
 			for(int i=0; i<37; i++)
    			{
    				id2[i] = i+1;
-        			pthread_create(&tid2[i], NULL, thread_f24, &id2[i]);
+   				if(i!=14 && i!=0 && i!=1 && i!=2 && i!=3)
+        			pthread_create(&tid2[i], NULL, thread_f24_2, &id2[i]);
         		}
     		
     			for(int i=0; i<37; i++)
@@ -308,6 +360,7 @@ int main()
     			}
     			
     			sem_destroy(&sem9);
+    			//sem_close(sem15);
     			///////////////////////////////////////
 		
 			info(END, 9, 0);
