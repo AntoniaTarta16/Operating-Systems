@@ -5,13 +5,17 @@
 #include<unistd.h>
 #include<string.h>
 #include<stdbool.h>
-
+#include <sys/mman.h>
 
 #define PIPE1 "RESP_PIPE_68812"
 #define PIPE2 "REQ_PIPE_68812"
 #define BEGIN "BEGIN!"
 #define PING "PING!"
 #define PONG "PONG!"
+#define SHM "CREATE_SHM!"
+#define SUCCESS "SUCCESS!"
+#define ERROR "ERROR!"
+#define W_SHM "WRITE_TO_SHM!"
 
 int main()
 {
@@ -49,7 +53,8 @@ int main()
     
     unsigned int pingNr=68812;
     unsigned int nr=0;
-    //char req[255];
+    int shmFd;
+    volatile char *data = NULL;
     
     while(true)
     {
@@ -73,8 +78,34 @@ int main()
     			read(fd2, &c, sizeof(c));
     		}
     		read(fd2, &nr, sizeof(nr));
+	
+    		shmFd = shm_open("/AnYQM3", O_CREAT | O_RDWR, 0664);
+    		write(fd1, &SHM, strlen(SHM));
+    		if(shmFd < 0)
+    		{
+    			write(fd1, &ERROR, strlen(ERROR));
+        		perror("Could not aquire shm");
+        		return -1;
+    		}
+    		else
+    		{
+    			write(fd1, &SUCCESS, strlen(SUCCESS));
+    		}
     		
-    		///////////later///////////
+    		ftruncate(shmFd, 3370847);
+    		data = (volatile char*)mmap(0, 3370847, PROT_READ | PROT_WRITE, MAP_SHARED, shmFd, 0);
+    		
+        	//write(fd1, &SHM, strlen(SHM));
+    		if(data == (void*)-1) 
+    		{
+    			//write(fd1, &ERROR, strlen(ERROR));
+        		perror("Could not map the shared memory");
+        		return -1;
+    		}
+    		/*else
+    		{
+    			write(fd1, &SUCCESS, strlen(SUCCESS));
+    		}*/
     	}
     	
     	if(c=='W')
@@ -83,9 +114,22 @@ int main()
     		{
     			read(fd2, &c, sizeof(c));
     		}
-    		read(fd2, &nr, sizeof(nr));
+    		unsigned int offset=0;
+    		unsigned int value=0;
     		
-    		///////////later///////////
+    		read(fd2, &offset, sizeof(offset));
+    		read(fd2, &value, sizeof(value));
+    		write(fd1, &W_SHM, strlen(W_SHM));
+    		if(0<=offset && offset+sizeof(value)<=3370847)
+    		{
+    			unsigned int *ptr = (unsigned int *)(data + offset);
+        		*ptr = value;
+        		write(fd1, &SUCCESS, strlen(SUCCESS));
+    		}
+    		else
+    		{
+    			write(fd1, &ERROR, strlen(ERROR));
+    		}
     	}
     	
     	if(c=='E')
