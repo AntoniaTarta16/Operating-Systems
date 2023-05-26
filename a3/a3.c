@@ -1,11 +1,12 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<sys/types.h>
 #include<sys/stat.h>
 #include<fcntl.h>
 #include<unistd.h>
 #include<string.h>
 #include<stdbool.h>
-#include <sys/mman.h>
+#include<sys/mman.h>
 
 #define PIPE1 "RESP_PIPE_68812"
 #define PIPE2 "REQ_PIPE_68812"
@@ -16,6 +17,7 @@
 #define SUCCESS "SUCCESS!"
 #define ERROR "ERROR!"
 #define W_SHM "WRITE_TO_SHM!"
+#define MAP "MAP_FILE!"
 
 int main()
 {
@@ -55,6 +57,7 @@ int main()
     unsigned int nr=0;
     int shmFd;
     volatile char *data = NULL;
+    volatile char *dataMap = NULL;
     
     while(true)
     {
@@ -119,6 +122,7 @@ int main()
     		
     		read(fd2, &offset, sizeof(offset));
     		read(fd2, &value, sizeof(value));
+    		
     		write(fd1, &W_SHM, strlen(W_SHM));
     		if(0<=offset && offset+sizeof(value)<=3370847)
     		{
@@ -132,6 +136,51 @@ int main()
     		}
     	}
     	
+    	if(c=='M')
+    	{
+    		for(int i=1;i<=8;i++)
+    		{
+    			read(fd2, &c, sizeof(c));
+    		}
+    		char *fileName=(char*)calloc(255,sizeof(char));
+    		int pos=-1;
+    		read(fd2, &c, sizeof(c));
+    		while(c!='!')
+    		{
+    			pos++;
+    			fileName[pos]=c;
+    			read(fd2, &c, sizeof(c));
+    		}
+    		pos++;
+    		fileName[pos]='\0';
+    		
+    		write(fd1, &MAP, strlen(MAP));
+    		
+    		int fd = open(fileName, O_RDONLY);
+    		if(fd == -1) 
+    		{
+    			write(fd1, &ERROR, strlen(ERROR));
+        		perror("Could not open input file");
+        		return -1;
+    		}
+    		off_t size = lseek(fd, 0, SEEK_END);
+    		lseek(fd, 0, SEEK_SET);
+
+    		dataMap = (volatile char*)mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0);
+    		if(dataMap == (void*)-1) 
+    		{
+    			write(fd1, &ERROR, strlen(ERROR));
+        		perror("Could not map file");
+        		close(fd);
+        		return -1;
+    		}
+    		else
+    		{
+    			write(fd1, &SUCCESS, strlen(SUCCESS));
+    		}
+    	
+    	}
+    	
     	if(c=='E')
     	{
     		for(int i=1;i<=4;i++)
@@ -141,7 +190,7 @@ int main()
     		close(fd1);
    		close(fd2);
     
-    		//delete fifo
+    		//delete 
     		unlink(PIPE1);
     		return 0;
     	}
