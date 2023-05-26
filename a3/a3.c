@@ -10,6 +10,8 @@
 #define PIPE1 "RESP_PIPE_68812"
 #define PIPE2 "REQ_PIPE_68812"
 #define BEGIN "BEGIN!"
+#define PING "PING!"
+#define PONG "PONG!"
 
 int main()
 {
@@ -45,14 +47,59 @@ int main()
     	write(fd1, &c, sizeof(c));
     }
     
-    /*while(true)
-    {
-    }*/
-    close(fd1);
-    close(fd2);
+    unsigned int pingNr=68812;
+    unsigned int nr=0;
+    //char req[255];
     
-    //delete fifo
-    unlink(PIPE1);
-
-    return 0;
+    while(true)
+    {
+    	read(fd2, &c, sizeof(c));
+    	if(c=='P')
+    	{
+    		for(int i=1;i<=4;i++)
+    		{
+    			read(fd2, &c, sizeof(c));
+    		}
+    		//read(fd2, &req, 4);
+    		write(fd1, &PING, strlen(PING));
+    		write(fd1, &pingNr, sizeof(pingNr));
+    		write(fd1, &PONG, strlen(PONG));
+    	}
+    	
+    	if(c=='C')
+    	{
+    		for(int i=1;i<=10;i++)
+    		{
+    			read(fd2, &c, sizeof(c));
+    		}
+    		read(fd2, &nr, sizeof(nr));
+    		
+    		///////////later///////////
+    	}
+    	
+    	if(c=='W')
+    	{
+    		for(int i=1;i<=12;i++)
+    		{
+    			read(fd2, &c, sizeof(c));
+    		}
+    		read(fd2, &nr, sizeof(nr));
+    		
+    		///////////later///////////
+    	}
+    	
+    	if(c=='E')
+    	{
+    		for(int i=1;i<=4;i++)
+    		{
+    			read(fd2, &c, sizeof(c));
+    		}
+    		close(fd1);
+   		close(fd2);
+    
+    		//delete fifo
+    		unlink(PIPE1);
+    		return 0;
+    	}
+    }
 }
