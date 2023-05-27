@@ -18,6 +18,7 @@
 #define ERROR "ERROR!"
 #define W_SHM "WRITE_TO_SHM!"
 #define MAP "MAP_FILE!"
+#define READ_OFF "READ_FROM_FILE_OFFSET!"
 
 int main()
 {
@@ -34,7 +35,7 @@ int main()
     if(fd2==-1) 
     {
         perror("Could not open PIPE2 for reading");
-        return 1;
+        return -1;
     }
     
     //open 2.2 - 3
@@ -43,7 +44,7 @@ int main()
     if(fd1==-1) 
     {
         perror("Could not open PIPE1 for writing");
-        return 1;
+        return -1;
     }
     
     char c=' ';
@@ -58,6 +59,8 @@ int main()
     int shmFd;
     volatile char *data = NULL;
     volatile char *dataMap = NULL;
+    off_t sizeMap=0;
+    int fd=0;
     
     while(true)
     {
@@ -88,7 +91,7 @@ int main()
     		{
     			write(fd1, &ERROR, strlen(ERROR));
         		perror("Could not aquire shm");
-        		return -1;
+        		//return -1;
     		}
     		else
     		{
@@ -101,9 +104,9 @@ int main()
         	//write(fd1, &SHM, strlen(SHM));
     		if(data == (void*)-1) 
     		{
-    			//write(fd1, &ERROR, strlen(ERROR));
+    			write(fd1, &ERROR, strlen(ERROR));
         		perror("Could not map the shared memory");
-        		return -1;
+        		//return -1;
     		}
     		/*else
     		{
@@ -156,29 +159,69 @@ int main()
     		
     		write(fd1, &MAP, strlen(MAP));
     		
-    		int fd = open(fileName, O_RDONLY);
+    		fd = open(fileName, O_RDONLY);
     		if(fd == -1) 
     		{
     			write(fd1, &ERROR, strlen(ERROR));
         		perror("Could not open input file");
-        		return -1;
+        		//return -1;
     		}
-    		off_t size = lseek(fd, 0, SEEK_END);
+    		sizeMap = lseek(fd, 0, SEEK_END);
     		lseek(fd, 0, SEEK_SET);
 
-    		dataMap = (volatile char*)mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0);
+    		dataMap = (volatile char*)mmap(NULL, sizeMap, PROT_READ, MAP_SHARED, fd, 0);
     		if(dataMap == (void*)-1) 
     		{
     			write(fd1, &ERROR, strlen(ERROR));
         		perror("Could not map file");
         		close(fd);
-        		return -1;
+        		//return -1;
     		}
     		else
     		{
     			write(fd1, &SUCCESS, strlen(SUCCESS));
     		}
     	
+    	}
+    	
+    	if(c=='R')
+    	{
+    		for(int i=1;i<=10;i++)
+    		{
+    			read(fd2, &c, sizeof(c));
+    		}
+    		//read(fd2, &c, sizeof(c));
+    		if(c=='F')
+    		{
+    			for(int i=1;i<=5;i++)
+    			{
+    				read(fd2, &c, sizeof(c));
+    			}
+    			if(c=='O')
+    			{
+    				for(int i=1;i<=6;i++)
+    				{
+    					read(fd2, &c, sizeof(c));
+    				}
+    				unsigned int offset=0;
+    				unsigned int noBytes=0;
+    		
+    				read(fd2, &offset, sizeof(offset));
+    				read(fd2, &noBytes, sizeof(noBytes));
+    				
+    				//write(fd1, &READ_OFF, strlen(READ_OFF));
+    				if(offset<0 || offset+noBytes>sizeMap)
+    				{	
+    					write(fd1, &READ_OFF, strlen(READ_OFF));
+    					write(fd1, &ERROR, strlen(ERROR));
+    				}
+    				
+				memcpy((char*)data, (char*)(dataMap+offset), noBytes);
+				write(fd1, &READ_OFF, strlen(READ_OFF));
+    				write(fd1, &SUCCESS, strlen(SUCCESS));
+    			}	
+    		
+    		}
     	}
     	
     	if(c=='E')
