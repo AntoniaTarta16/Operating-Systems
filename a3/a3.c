@@ -19,6 +19,8 @@
 #define W_SHM "WRITE_TO_SHM!"
 #define MAP "MAP_FILE!"
 #define READ_OFF "READ_FROM_FILE_OFFSET!"
+#define READ_SECT "READ_FROM_FILE_SECTION!"
+#define READ_LOGIC "READ_FROM_LOGICAL_SPACE_OFFSET!"
 
 int main()
 {
@@ -219,9 +221,34 @@ int main()
 				memcpy((char*)data, (char*)(dataMap+offset), noBytes);
 				write(fd1, &READ_OFF, strlen(READ_OFF));
     				write(fd1, &SUCCESS, strlen(SUCCESS));
+    			}
+    			else
+    			{
+    				for(int i=1;i<=7;i++)
+    				{
+    					read(fd2, &c, sizeof(c));
+    				}
+    				unsigned int section=0;
+    				unsigned int offset=0;
+    				unsigned int noBytes=0;
+    		
+    				read(fd2, &section, sizeof(section));
+    				read(fd2, &offset, sizeof(offset));
+    				read(fd2, &noBytes, sizeof(noBytes));
+    				
+    					
+    				write(fd1, &READ_SECT, strlen(READ_SECT));
+    				write(fd1, &ERROR, strlen(ERROR));
+    				
+				
+    				//write(fd1, &SUCCESS, strlen(SUCCESS));
     			}	
     		
     		}
+    	}
+    	else
+    	{
+    			
     	}
     	
     	if(c=='E')
